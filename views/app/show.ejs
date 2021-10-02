@@ -1,0 +1,199 @@
+<%- include("../partials/show_template.ejs") %> 
+<body class="d-flex flex-column ">
+
+    <%- include("../partials/navbar.ejs") %>     
+    
+    
+
+  
+  
+    <section class="jumbotron jumbotron-fluid bg-primary p-2 mb-3">
+        <div class="container">
+            <span class="me-2"><h1 class="d-inline-block text-white me-3">Posted by : </h1> </span><h1 class="d-inline-block text-white"><%= info.publisher.username%> </h1>
+        </div>
+       
+    </section>
+    <%- include("../partials/flash.ejs") %>     
+    
+    <main class="container-fluid  ">
+
+     <section class="row container-fluid ">
+
+      <div class="col-lg-10 offset-lg-1 ">
+        <!-- <div class="card mb-4 box-shadow">
+          <% for(img of info.images){ %> 
+          <img class="card-img-top" src="<%= img.url %> " alt="Card image cap">
+        <% } %> 
+          </div>
+        </div> -->
+
+        <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner ">
+            <% info.images.forEach((img , i) =>{ %>
+                     
+        <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
+              <img src="<%= img.url%>" class="d-inline-block w-100 " alt="...">
+            </div>
+            <% }) %> 
+          </div>
+            <% if(info.images.length > 1){ %> 
+          <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        <% }%>
+        </div>
+        </div>
+
+     </section>
+
+
+
+
+
+
+
+        <section class="row mt-4 ">
+            <div class="col-lg-4 offset-lg-1 col-md-6  col-sm-12 order-lg-first order-sm-last my-auto">
+                <div class="container">
+                    <h2 class="text-black"><%= info.title %></h2>
+                    <h2 class="card-text"><%= info.price %>Rs</h2>
+                    <h3 class="text-muted"><%= info.location %> </h3>
+                    <p><%= info.description %></p>
+                    <span class="me-2"><h3 class="d-inline-block text-black me-3">Category : </h3></span><h5 class="d-inline-block"><%= info.category %> </h5>
+                   
+                    <br>
+                    <br>
+       <% if(CurrentUser && info.publisher.equals(CurrentUser._id)){ %> 
+                <div class="d-flex justify-content-between align-items-center ">
+                    <div class="btn-group ">
+                      <button type="button" class="btn btn-md btn-primary me-3"><a href="/home/<%= info._id %>/edit">EDIT</a></button>
+                      
+                          <!-- Button trigger modal -->
+                           <button type="button" class="btn btn-danger btn-md" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                               DELETE
+                           </button>
+  
+  <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                           <h5 class="modal-title" id="staticBackdropLabel">are you sure , you want to delete the item</h5>
+                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                   </div>
+                                                  <div class="modal-body">
+                                                     press the delete button
+                                                   </div>
+                                                   <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                          <form action="/home/<%= info._id %>?_method=DELETE" method="POST">
+                                                             <button class="btn btn-danger">DELETE</button>
+                                                          </form>
+          
+                                                    </div>
+                                </div>
+                            </div>
+                         </div>
+
+                      
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                  <% } %> 
+                </div>
+            </div>
+          <!--image carosel will start from here-->
+          <section class=" col-lg-6 col-md-6 col-sm-12  order-lg-last order-sm-first">
+            <div id='map' class="container h-100">
+            
+            </div>
+
+          </section>
+            
+               
+
+        </section>
+
+
+
+
+
+        <section class="row">
+          
+          
+          
+          
+          
+          <section class="container-fluid">
+            <div class="container clearfix ">
+              <h2 class="text-primary d-inline-block float-start pt-2  ">See what Others says about it</h2>
+             
+              <a class="btn btn-lg btn-danger my-2 float-end" href="/home/<%= info._id%>/comment/new ">Add comment</a>
+          
+            </div>
+        
+            <hr>
+           
+             <% for(comment of info.comments) {%>
+              <div class="card  bg-dark text-light mb-3">
+                <div class="card-header bg-success">
+                  <h3>Rating : <%=  comment.rating %> </h3>
+                 
+                  
+                </div>
+                <div class="card-body">
+                  <blockquote class="blockquote mb-0">
+                    <p><%= comment.response %> </p>
+                    <footer class="blockquote-footer">Commented By <cite title="Source Title" class="text-secandary"><%= comment.name.username %> </cite></footer>
+                  </blockquote>
+                </div>
+                <% if(CurrentUser && comment.name.equals(CurrentUser._id)){ %> 
+                <form action="/home/<%= info._id %>/comment/<%= comment._id %>?_method=DELETE" method="POST" class="clearfix"> 
+                  <button  class="btn btn-danger  mt-2 mb-3 me-2 float-end" type="submit" >
+                    delete
+                  </button>
+                </form>
+                <% } %> 
+          
+              </div>
+             
+             <% } %>  
+          </section>
+          </section>
+      
+
+      
+
+        
+
+    </main>
+   
+    <script>
+     const mytoken = '<%-process.env.MAPBOX_TOKEN %>'
+     let map_info = '<%- JSON.stringify(info)%>'
+  
+     
+//      mapboxgl.accessToken = mytoken;
+// const map = new mapboxgl.Map({
+// container: 'map', // container ID
+// style: 'mapbox://styles/mapbox/streets-v11', // style URL
+// center:  `${map_info.geometry.coordinates}`, // starting position [lng, lat]
+// zoom: 8 // starting zoom
+// });
+
+
+// new mapboxgl.Marker()
+//     .setLngLat(data.geometry.coordinates)
+//     .addTo(map);
+// </script>
+
+ <script src="../../javascript/showMap.js"></script>
+   
+
+
+<%- include("../partials/footer.ejs") %> 

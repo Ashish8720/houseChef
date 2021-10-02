@@ -1,0 +1,55 @@
+<%- include("../partials/home_template.ejs") %> 
+<body class="d-flex flex-column vh-100">
+    <%- include("../partials/navbar.ejs") %> 
+
+
+
+    
+    
+    <div class="jumbotron jumbotron-fluid bg-warning p-3  ">
+      <div class="container d-flex justify-content-between ">
+        <div>
+          <p class="text-white me-1 d-inline-block fs-5">Want to make a new Item</p>
+          <button class="btn btn-success mx-auto"><a class="text-white" href="/home/new">Add new item</a></button>
+        </div>
+        
+        <form class="d-inline-flex " method="GET"  action="/home?category">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+
+    </div>
+    <%- include("../partials/flash.ejs") %> 
+      
+
+    <main class="container-fluid flex-shrink-0 my-4">
+
+    <div class="row mx-1 mt-3">
+      <% for(let c of index){ %>
+      <div class=" col-lg-3 col-md-4 col-sm-12 rounded ">
+        <div class="card mb-4 box-shadow border border-dark  rounded">
+          <% if(c.images.length) { %> 
+          <img class="card-img-top " src="<%= c.images[0].url%>" alt="Card image cap">
+          <% }else { %> 
+            <img class="card-img-top " src="<%= 'https://res.cloudinary.com/dkquw3h0q/image/upload/v1629889645/HouseChef/ziiloiahseb1e63nztju.jpg'%>" alt="Card image cap">
+          <% } %> 
+          <div class="card-body bg-warning ">
+            <h5 class="card-title text-center text-black"><%= c.title %></h5>
+            <div class="d-flex justify-content-between align-items-center">
+              <small ><h4 class="card-text"><%= c.price %>Rs</h4></small>
+                <button type="button" class="btn btn-danger btn-sm rounded-pill border border-dark"> <a href="/home/<%= c._id %> ">more info >></a></button>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %> 
+    
+    </div>
+
+    </main>
+  
+
+<%- include("../partials/footer.ejs") %> 

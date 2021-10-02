@@ -1,0 +1,23 @@
+/* main{
+    width: auto;
+    height: auto;
+} */
+
+.carousel-inner {
+   width: auto;
+   height: 600px; 
+ 
+}
+.carousel-inner img{
+      width: auto;
+      height: auto;
+      display: block;
+   object-fit: cover; 
+
+}
+
+
+button a{
+    text-decoration: none;
+    color: white;
+}

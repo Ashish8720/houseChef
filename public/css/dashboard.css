@@ -1,0 +1,36 @@
+#dashboard{
+  background-image: url("/images/dashboard_1.jpg") ;
+  background-color: rgb(128,128,128);
+  background-blend-mode: multiply;
+  /* background-blend-mode: darken; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: fit-content;
+  width: fit-content;
+  
+ 
+ 
+}
+ .container-fluid{
+   width: 100vw;
+   height: 100vh;
+
+ }
+ h1{
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Oswald', sans-serif;
+ }
+ 
+ a{
+   text-decoration: none;
+   text-decoration-style: none;
+ }
+
+ img{
+   height: 100px;
+   width: 100px;
+   margin-left: 35%;
+   background-color: white;
+   border-radius: 20%;
+
+ }

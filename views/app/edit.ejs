@@ -1,0 +1,97 @@
+
+
+<%- include("../partials/template.ejs") %> 
+<%- include("../partials/navbar.ejs") %> 
+<body class="d-flex flex-column">
+      <main class="container-fluid mb-3 ">
+        <section class="row ">
+
+ <section class="col-3 offset-1 my-auto ">
+   <img  class="img-fluid" src="../../images/recipe.jpg" alt="sdasdsa" >
+ </section>
+
+          
+  <section class=" col-4  offset-1 bg-dark bg-gradient my-2">
+    <h1 class=" text-center text-primary"> Edit Recipe</h1>
+    <form  action="/home/<%= edit._id %>?_method=PATCH "  method="post" class="req_validation" novalidate enctype="multipart/form-data">
+
+      
+
+      <label  class="form-label" for="title"><span class="fs-6 " style="color:white; font-weight: bold;">TITLE</span></label>
+      <input  class="form-control" type="text" id="publisher" name="recipe[title]"value="<%= edit.title %>" required>
+      <div class="invalid-feedback">
+        title can't be empty
+     </div>
+
+     <label   class="form-label" for="image"> <span class="fs-6 " style="color:white; font-weight: bold;"> ADD MORE IMAGE</span></label>
+     <input class="form-control" type="file" id="image" name="image"  multiple>
+     <div class="invalid-feedback">
+       must required an image
+    </div>
+
+
+      <label  class="form-label" for="price"><span class="fs-6 " style="color:white; font-weight: bold;">PRICE</span></label>
+      <input class="form-control" type="number" id="price" name="recipe[price]" value="<%= edit.price %>" required>
+      <div class="invalid-feedback">
+        price can't be empty
+     </div>
+
+      <label   class="form-label" for="location"><span class="fs-6 " style="color:white; font-weight: bold;">LOCATION</span></label>
+      <input class="form-control" type="text" id="location" name="recipe[location]" value="<%= edit.location %>" required>
+      <div class="invalid-feedback">
+        location can't be empty
+     </div>
+
+      <label   class="form-label" for="category"><span class="fs-6 " style="color:white; font-weight: bold;">CATEGORY</span></label>
+      <select  class="form-control" id="category" name="recipe[category]">
+        <% for(let data of options) {  %>
+          <option value='<%= data %>' <%= data === edit.category ? "selected" : " " %> ><%= data %> </option>
+        <% } %>  
+      </select>
+
+
+      <label class="form-label" for="description"><span class="fs-6 " style="color:white; font-weight: bold;">DESCRIPTION</span></label>
+      <textarea class="form-control" rows="4" cols="30" id="description" name="recipe[description]" required><%= edit.description %></textarea>
+      <div class="invalid-feedback">
+        description can't be empty
+     </div>
+
+     <div class="container mb-3">
+      <% edit.images.forEach((img , index)=>{ %>
+           <img  class="img-thumbnail " src="<%= img.url%> "  >
+           <div class="form-check-inline ">
+             <input type="checkbox" id="img-<%= index %>" name="deleteImages[]" value=<%= img.filename %>>
+           </div>
+           <label  class="me-2" for="img-<%= index %>">delete?</label>
+    
+     <% }) %> 
+    </div>
+
+     <div class=" d-flex btn-group my-1" role="group" aria-label="Basic mixed styles example">
+      <button type="submit" class="btn btn-success btn-lg me-2">update</button>
+      <button type="button" class="btn btn-danger btn-lg"><a  href="/home/<%= edit._id %>" style="text-decoration: none; color: white;">back to homepage</a></button>
+     </div>
+    </form>
+   
+     
+    
+
+    </section>
+    
+  </section>
+
+  
+
+
+   
+
+    </main>
+    <script src="../../javascript/validationform.js"></script>
+
+
+
+    <%- include("../partials/footer.ejs") %> 
+
+
+     
+      

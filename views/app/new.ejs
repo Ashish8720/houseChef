@@ -1,0 +1,81 @@
+<%- include("../partials/template.ejs") %> 
+<%- include("../partials/navbar.ejs") %> 
+<body class="d-flex flex-column vh-100">
+ 
+      <main class="container-fluid my-auto ">
+        <section class="row ">
+
+ <section class="col-lg-3 offset-1  my-auto ">
+   <img  class="img-fluid " src="../images/recipe.jpg" alt="sdasdsa" >
+ </section>
+
+          
+  <section class=" col-lg-4  offset-1 col-md-3  bg-dark bg-gradient">
+    <h1 class=" text-center text-primary"> NEW RECIPE</h1>
+    <form action="/home"  method="post" novalidate class="req_validation" enctype="multipart/form-data">
+
+      
+        
+      <label  class="form-label" for="title"> <span class="fs-6 " style="color:white; font-weight: bold;">TITLE</span></label>
+      <input  class="form-control" type="text" id="publisher" name="recipe[title]" required>
+      <div class="invalid-feedback">
+        must have a proper title name
+     </div>
+
+   
+      <label   class="form-label" for="image"> <span class="fs-6 " style="color:white; font-weight: bold;">IMAGE</span></label>
+      <input class="form-control" type="file" id="image" name="image"  required multiple>
+      <div class="invalid-feedback">
+        must required an image
+     </div>
+
+      <label  class="form-label" for="price"> <span class="fs-6 " style="color:white; font-weight: bold;">PRICE</span></label>
+      <input class="form-control" type="number" id="price" name="recipe[price]" required>
+      <div class="invalid-feedback">
+        price must required
+     </div>
+
+
+      <label   class="form-label" for="location"> <span class="fs-6 " style="color:white; font-weight: bold;">LOCATION</span></label>
+      <input class="form-control" type="text" id="location" name="recipe[location]" required>
+      <div class="invalid-feedback">
+        location is required
+     </div>
+
+      <label   class="form-label" for="category"> <span class="fs-6 " style="color:white; font-weight: bold;">CATEGORY</span></label>
+      <select  class="form-control" id="category" name="recipe[category]">
+          <% for( let data of options) { %> 
+          <option value='<%= data %>'><%= data %> </option>
+          <% } %> 
+      </select>
+
+
+      <label class="form-label" for="description"> <span class="fs-6 " style="color:white; font-weight: bold;">DESCRIPTION</span></label>
+      <textarea class="form-control" rows="4" cols="30" id="description" name="recipe[description]" required></textarea>
+      <div class="invalid-feedback">
+        description is required
+     </div>
+
+
+      <div class=" d-flex btn-group my-1" role="group" aria-label="Basic mixed styles example">
+        <button type="submit" class="btn btn-success btn-lg me-2">submit</button>
+        <button type="button" class="btn btn-danger btn-lg"><a  href="/home" style="text-decoration: none; color: white;">back to homepage</a></button>
+      
+    </form>
+    
+
+    </section>
+    
+  </section>
+
+    </main>
+    <script src="../javascript/validationForm.js"></script>
+
+   
+    
+
+
+    <%- include("../partials/footer.ejs") %> 
+
+     
+      

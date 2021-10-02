@@ -1,0 +1,51 @@
+<%- include("../partials/template.ejs") %> 
+<%- include("../partials/navbar.ejs") %> 
+<body class="d-flex flex-column vh-100">
+
+    <%- include("../partials/flash.ejs") %> 
+      <main class="container-fluid my-auto ">
+        <section class="row ">
+
+ <section class="col-lg-3 offset-1  my-auto ">
+   <img  class="img-fluid " src="../images/recipe.jpg" alt="sdasdsa" >
+ </section>
+
+          
+  <section class=" col-lg-4  offset-1 col-md-3  bg-dark bg-gradient">
+    <h1 class=" text-center text-primary"> LOGIN FORM</h1>
+    <form action="/login"  method="post" novalidate class="req_validation">
+
+      <label  class="form-label ,my-1" for="username"> <span class="fs-6 " style="color:white; font-weight: bold;">USERNAME</span></label>
+      <input class="form-control" type="text" id="username" name=username required> 
+      <div class="invalid-feedback">
+         name 
+      </div>
+        
+
+      <label   class="form-label my-1" for="password"> <span class="fs-6 " style="color:white; font-weight: bold;">PASSWORD</span></label>
+      <input class="form-control" type="password" id="password" name="password" required>
+      <div class="invalid-feedback">
+        password is required
+     </div>
+
+     <div class=" d-flex btn-group my-auto" role="group" aria-label="Basic mixed styles example">
+        <button type="submit" class="btn btn-success btn-lg me-2">login</button>
+        <button type="button" class="btn btn-danger btn-lg"><a  href="/home" style="text-decoration: none; color: white;">back</a></button>
+      
+    </form>
+    
+
+    </section>
+    
+  </section>
+
+    </main>
+    <script src="../javascript/validationForm.js"></script>
+
+   
+    
+
+
+    <%- include("../partials/footer.ejs") %> 
+
+     
